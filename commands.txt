@@ -1,0 +1,4 @@
+dotnet ef dbcontext scaffold "server=35.239.152.184;port=3306;user=root;password=vijay@123;database={{dbName}}" Pomelo.EntityFrameworkCore.MySql -o {{POCOFolderName}} -f
+https://vijay-angular.appspot.com/index.php?token=84d607909085a1d8891466a2bdfc8593
+root
+vijay@123
