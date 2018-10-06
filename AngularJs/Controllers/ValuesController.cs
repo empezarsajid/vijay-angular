@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using AngularJs.Entity.Classes;
 namespace AngularJs.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+
+        private readonly vijayContext _context;
+
+        public ValuesController(vijayContext context)
+        {
+            _context = context;
+        }
+
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            var users = _context.Users.ToList();
             return new string[] { "value1", "value2" };
         }
 
