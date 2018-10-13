@@ -1,0 +1,33 @@
+<p>
+  Welcome <b>{{name}}  !</b> <a href="javascript:;" (click)="logout()">Logout</a>
+</p>
+
+<div [hidden]="!success.isSuccess" class="alert alert-success">
+  <strong>Success!</strong> {{success.message}}
+</div>
+<div [hidden]="!error.isError" class="alert alert-danger">
+  <strong>Error!</strong> {{error.message}}
+</div>
+
+<table *ngIf="users.length > 0" class="table table-striped">
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Phone</td>
+      <td>Role</td>
+      <td>Approved</td>
+      <td>Action</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.roleId == 2 ? 'SuperVisor': 'User'}}</td>
+      <td>{{user.isApproved ? 'Yes': 'No'}}</td>
+      <td><a href="javascript:;" (click)="toggleIsApproved(user)">{{user.isApproved ? 'Unapprove': 'Approve'}} Profile</a></td>
+    </tr>
+  </tbody>
+</table>
