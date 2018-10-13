@@ -2,4 +2,4 @@ dotnet ef dbcontext scaffold "server=35.239.152.184;port=3306;user=root;password
 https://vijay-angular.appspot.com/index.php?token=84d607909085a1d8891466a2bdfc8593
 root
 vijay@123
-32145
+3214
