@@ -1,0 +1,5 @@
+1. Created the github account (vijay-singh-git)
+2. Accepted the github invite sent by Sajid
+3. Installed the node.js, VS Code and MySql client (workbench).
+4. Ran npm link to fix error "you seem to not be depending on @angular/core and/or rxjs . this is an error"
+5. 
