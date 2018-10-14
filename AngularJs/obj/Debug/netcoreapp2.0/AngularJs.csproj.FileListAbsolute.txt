@@ -1,0 +1,11 @@
+E:\ESLabs\vijay-angular\AngularJs\bin\Debug\netcoreapp2.0\AngularJs.deps.json
+E:\ESLabs\vijay-angular\AngularJs\bin\Debug\netcoreapp2.0\AngularJs.runtimeconfig.json
+E:\ESLabs\vijay-angular\AngularJs\bin\Debug\netcoreapp2.0\AngularJs.runtimeconfig.dev.json
+E:\ESLabs\vijay-angular\AngularJs\bin\Debug\netcoreapp2.0\AngularJs.dll
+E:\ESLabs\vijay-angular\AngularJs\bin\Debug\netcoreapp2.0\AngularJs.pdb
+E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.csprojAssemblyReference.cache
+E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.csproj.CoreCompileInputs.cache
+E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.AssemblyInfoInputs.cache
+E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.AssemblyInfo.cs
+E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.dll
+E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.pdb

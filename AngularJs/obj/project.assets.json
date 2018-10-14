@@ -12995,11 +12995,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "e:\\ES-Labs\\AngularJs\\AngularJs.csproj",
+      "projectUniqueName": "E:\\ESLabs\\vijay-angular\\AngularJs\\AngularJs.csproj",
       "projectName": "AngularJs",
-      "projectPath": "e:\\ES-Labs\\AngularJs\\AngularJs.csproj",
+      "projectPath": "E:\\ESLabs\\vijay-angular\\AngularJs\\AngularJs.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "e:\\ES-Labs\\AngularJs\\obj\\",
+      "outputPath": "E:\\ESLabs\\vijay-angular\\AngularJs\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

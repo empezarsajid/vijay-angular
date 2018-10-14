@@ -13,6 +13,8 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
+using AngularJs.Repository;
+
 namespace AngularJs
 {
     public class Startup
@@ -35,8 +37,12 @@ namespace AngularJs
                 // Connecting to a local proxy that does not support ssl.
                 SslMode = MySqlSslMode.None,
             };
+            
+            // Add DI for db context and repositories
             services.AddDbContext<vijayContext>(options =>
               options.UseMySql(connectionString.ConnectionString));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserInRoleRepository, UserInRoleRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +61,7 @@ namespace AngularJs
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
-            );   
+            );
 
             app.UseMvc();
         }
