@@ -5,21 +5,23 @@ import {
   MatPaginatorModule, MatTableModule, MatSortModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { JwtInterceptor } from '../helpers/jwtInterceptor';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule,
-    ReactiveFormsModule,
+    MatSortModule
   ],
-  exports: [MatFormFieldModule, MatInputModule, MatButtonModule,
-    MatPaginatorModule, MatTableModule, MatSortModule, ReactiveFormsModule],
+  exports: [
+    ReactiveFormsModule, MatFormFieldModule, MatInputModule,
+    MatButtonModule, MatPaginatorModule, MatTableModule, MatSortModule
+  ],
   declarations: []
 })
 export class SharedModule { }

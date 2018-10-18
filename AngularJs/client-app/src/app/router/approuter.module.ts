@@ -24,7 +24,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   declarations: [RegistrationComponent, LoginComponent, HomeComponent]
 })

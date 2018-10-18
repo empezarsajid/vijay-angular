@@ -4,12 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRouterModule } from './router/approuter.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpService } from './services/http.service';
-import {
-  MatFormFieldModule, MatInputModule, MatButtonModule,
-  MatPaginatorModule, MatTableModule, MatSortModule
-} from '@angular/material';
+import { UserService } from './services/user.service';
+import { JwtInterceptor } from './helpers/jwtInterceptor';
+import { ErrorInterceptor} from './helpers/errorInterceptor';
 
 @NgModule({
   declarations: [
@@ -18,12 +17,14 @@ import {
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,    
-    AppRouterModule ,
+    BrowserAnimationsModule,
+    AppRouterModule,
     HttpClientModule,
-     MatPaginatorModule, MatTableModule, 
   ],
-  providers: [HttpService],
+  providers: [HttpService,UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

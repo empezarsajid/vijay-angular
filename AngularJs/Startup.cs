@@ -11,9 +11,13 @@ using Microsoft.Extensions.Options;
 using AngularJs.Entity.Classes;
 using System.Data;
 using MySql.Data.MySqlClient;
-using System.Security.Cryptography.X509Certificates;
+//using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using AngularJs.Repository;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AngularJs.Helpers;
 
 namespace AngularJs
 {
@@ -37,7 +41,32 @@ namespace AngularJs
                 // Connecting to a local proxy that does not support ssl.
                 SslMode = MySqlSslMode.None,
             };
-            
+
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             // Add DI for db context and repositories
             services.AddDbContext<vijayContext>(options =>
               options.UseMySql(connectionString.ConnectionString));
@@ -56,12 +85,15 @@ namespace AngularJs
             // app.UseCors(
             //     options=> options.WithOrigins("*").AllowAnyMethod()
             // );
+
             app.UseCors(builder => builder
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
             );
+            
+            app.UseAuthentication();
 
             app.UseMvc();
         }

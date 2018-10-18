@@ -29,7 +29,7 @@ namespace AngularJs.Repository.GenericRepository
 
         public virtual T Update(T entity)
         {
-            if (this.Find(v => v == entity) == entity)
+            if (entity != null)
             {
                 _dbset.Attach(entity);
                 _dbcontext.Entry(entity).State = EntityState.Modified;
@@ -43,7 +43,7 @@ namespace AngularJs.Repository.GenericRepository
         }
         public virtual bool Delete(T entity)
         {
-            if (this.Find(v => v == entity) == entity)
+            if (entity != null)
             {
                 _dbset.Remove(entity);
                 _dbcontext.SaveChanges();
@@ -57,22 +57,22 @@ namespace AngularJs.Repository.GenericRepository
 
         public virtual bool IsExists(Expression<Func<T, bool>> match)
         {
-             return _dbset.Count(match) > 0;
+            return _dbset.Count(match) > 0;
         }
 
-        public virtual T Find(Expression<Func<T, bool>> match)
+        public virtual T Find(int id)
         {
-            return _dbset.Find(match);
+            return _dbset.Find(id);
         }
 
-        public virtual  IEnumerable<T> GetList(Expression<Func<T, bool>> match)
+        public virtual IEnumerable<T> GetList(Expression<Func<T, bool>> match)
         {
             return _dbset.Where(match);
         }
 
         public virtual int GetCount(Expression<Func<T, bool>> match)
         {
-             return _dbset.Count(match);
+            return _dbset.Count(match);
         }
 
         public IEnumerable<T> GetAll()

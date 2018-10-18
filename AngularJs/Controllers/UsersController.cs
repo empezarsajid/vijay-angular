@@ -7,27 +7,40 @@ using AngularJs.Entity.Classes;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using AngularJs.DTO;
 using AngularJs.Repository;
+
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using AngularJs.Helpers;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 
 namespace AngularJs.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserInRoleRepository _userInRoleRepository;
         private readonly vijayContext _context;
+        private readonly AppSettings _appSettings;
+
         public UsersController(IUserRepository userRepository, IUserInRoleRepository userInRoleRepository,
-        vijayContext context)
+         vijayContext context, IOptions<AppSettings> appSettings)
         {
             _userRepository = userRepository;
             _userInRoleRepository = userInRoleRepository;
             _context = context;
+            _appSettings = appSettings.Value;
         }
 
         [HttpGet]
         [Route("getall")]
-        public IEnumerable<UserLoginModel> GetAll()
+        public IEnumerable<UsersDTO> GetAll()
         {
             var userLoginModel = (
                 from user in _context.Users
@@ -35,7 +48,7 @@ namespace AngularJs.Controllers
                 on user.Id equals role.UserId
                 where role.RoleId != 1  // Exclude admin user
                 && user.IsDeleted == false   // Exclude deleted user
-                select new UserLoginModel()
+                select new UsersDTO()
                 {
                     Name = user.Name,
                     CreatedDate = user.CreatedDate,
@@ -43,12 +56,14 @@ namespace AngularJs.Controllers
                     Email = user.Email,
                     Id = user.Id,
                     RoleId = role.RoleId,
-                    Phone = user.Phone
+                    Phone = user.Phone,
+                    IsApproved = user.IsApproved
                 }).ToList();
 
             return userLoginModel;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("AddUser")]
         public Users AddUser(int userRole, [FromBody]Users user)
@@ -63,6 +78,7 @@ namespace AngularJs.Controllers
             return user;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("CheckIfExists")]
         public bool CheckIfExists([FromBody]Users user)
@@ -71,9 +87,10 @@ namespace AngularJs.Controllers
             return _userRepository.IsExists(m => m.UserName == user.UserName || m.Email == user.Email);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("UserLogin")]
-        public UserLoginModel UserLogin([FromBody]Users userModel)
+        public UsersDTO UserLogin([FromBody]Users userModel)
         {
             var userLoginModel = (
                 from user in _context.Users
@@ -90,7 +107,29 @@ namespace AngularJs.Controllers
 
             if (userLoginModel != null)
             {
-                return new UserLoginModel { Name = userLoginModel.Name, Id = userLoginModel.Id, RoleId = userLoginModel.RoleId };
+
+                // authentication successful so generate jwt token
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                    new Claim(ClaimTypes.Name, userLoginModel.Id.ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddMinutes(5),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                return new UsersDTO
+                {
+                    Name = userLoginModel.Name,
+                    Id = userLoginModel.Id,
+                    RoleId = userLoginModel.RoleId,
+                    Token = tokenHandler.WriteToken(token)
+                };
             }
             else
             {
@@ -102,8 +141,14 @@ namespace AngularJs.Controllers
         [Route("UpdateUser")]
         public Users UpdateUser([FromBody]Users user)
         {
-            user.ModifiedDate = DateTime.Now;
-            return _userRepository.Update(user);
+            var entity = _userRepository.Find(user.Id);
+            if (entity != null)
+            {
+                entity.ModifiedDate = DateTime.Now;
+                entity.IsApproved = user.IsApproved;
+                return _userRepository.Update(entity);
+            }
+            return null;
         }
     }
 }

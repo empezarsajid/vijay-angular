@@ -14,7 +14,7 @@ namespace AngularJs.Repository.GenericRepository
         T Update(T entity);
         bool Delete(T entity);
         bool IsExists(Expression<Func<T, bool>> match);
-        T Find(Expression<Func<T, bool>> match);
+        T Find(int id);
         IEnumerable<T> GetList(Expression<Func<T, bool>> match);
         int GetCount(Expression<Func<T, bool>> match);
         IEnumerable<T> GetAll();
