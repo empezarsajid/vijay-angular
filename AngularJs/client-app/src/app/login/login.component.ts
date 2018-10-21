@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   loading = false;
-  error = false;
+  error = { 'isError': false, 'message': '' };
   constructor(private router: Router, private formBuilder: FormBuilder, private httpService: HttpService) { }
 
   ngOnInit() {
@@ -44,11 +44,18 @@ export class LoginComponent implements OnInit {
     this.httpService.httpPost('api/users/UserLogin', data).subscribe(data => {
       this.loading = false;
       if (data != null) {
-        localStorage.setItem('currentUser', JSON.stringify(data));
-        this.router.navigate(['dashboard']);
+        if (data['token'] == '' || data['roleId'] == 0) {
+          this.error.isError = true;
+          this.error.message = "Unauthorized, Contact admin.";
+        }
+        else {
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.router.navigate(['dashboard']);
+        }
       }
       else {
-        this.error = true;
+        this.error.isError = true;
+        this.error.message = "Username and Password did not match.";
       }
     });
   }

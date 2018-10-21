@@ -9,3 +9,6 @@ E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.AssemblyInfo
 E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.AssemblyInfo.cs
 E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.dll
 E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.pdb
+E:\ESLabs\vijay-angular\AngularJs\bin\Debug\netcoreapp2.0\Repository.dll
+E:\ESLabs\vijay-angular\AngularJs\bin\Debug\netcoreapp2.0\Repository.pdb
+E:\ESLabs\vijay-angular\AngularJs\obj\Debug\netcoreapp2.0\AngularJs.csproj.CopyComplete

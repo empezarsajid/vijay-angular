@@ -1,0 +1,9 @@
+E:\ESLabs\vijay-angular\AngularJs\Repositories\bin\Debug\netstandard2.0\Repository.deps.json
+E:\ESLabs\vijay-angular\AngularJs\Repositories\bin\Debug\netstandard2.0\Repository.dll
+E:\ESLabs\vijay-angular\AngularJs\Repositories\bin\Debug\netstandard2.0\Repository.pdb
+E:\ESLabs\vijay-angular\AngularJs\Repositories\obj\Debug\netstandard2.0\Repository.csprojAssemblyReference.cache
+E:\ESLabs\vijay-angular\AngularJs\Repositories\obj\Debug\netstandard2.0\Repository.csproj.CoreCompileInputs.cache
+E:\ESLabs\vijay-angular\AngularJs\Repositories\obj\Debug\netstandard2.0\Repository.AssemblyInfoInputs.cache
+E:\ESLabs\vijay-angular\AngularJs\Repositories\obj\Debug\netstandard2.0\Repository.AssemblyInfo.cs
+E:\ESLabs\vijay-angular\AngularJs\Repositories\obj\Debug\netstandard2.0\Repository.dll
+E:\ESLabs\vijay-angular\AngularJs\Repositories\obj\Debug\netstandard2.0\Repository.pdb

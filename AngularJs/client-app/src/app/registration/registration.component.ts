@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['',],
       phone: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.required,]
     });
   }
 
@@ -53,6 +53,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerUser(): void {
+
     this.loading = true;
     var data = {
       "Name": this.f.name.value,
@@ -62,28 +63,31 @@ export class RegistrationComponent implements OnInit {
       "Email": this.f.email.value
     };
 
-    if (!this.checkIfUserExists(data.UserName, data.Email)) {
+    this.checkIfUserExistsAndRegister(data);
+  }
 
-      this.httpService.httpPost('api/users/adduser?userRole=3', data).subscribe(data => {
+  checkIfUserExistsAndRegister(data: any) {
+    var param = {
+      "UserName": data.Name,
+      "Email": data.Email
+    };
+
+    this.httpService.httpPostPromise('api/users/CheckIfExists', data).then(res=> {
+      if (res != null && res != true) {
+        this.addUser(data);
+      }
+      else {
         this.loading = false;
-        this.success = true;
-      });
-
-    }
+        this.error = true;
+      }
+    });
   }
 
-  checkIfUserExists(userName: string, email: string): boolean {
-    
-    // var data = {
-    //   "UserName": this.f.userName.value,
-    //   "Email": this.f.email.value
-    // };
-
-    // this.httpService.httpPost('api/users/CheckIfExists', data).subscribe(data => {
-    //   this.loading = false;
-    //   this.error = true;
-    //   return data;
-    // });
-    return false;
+  addUser(data: any): void {
+    this.httpService.httpPost('api/users/adduser?userRole=3', data).subscribe(data => {
+      this.loading = false;
+      this.success = true;
+    });
   }
+
 }

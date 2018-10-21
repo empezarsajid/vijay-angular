@@ -13,6 +13,6 @@ namespace AngularJs.Repository
         bool IsExists(Expression<Func<Users, bool>> match);
         Users Update(Users user);
 
-        Users Find(int id);
+        Users Find(Expression<Func<Users, bool>> match);
     }
 }

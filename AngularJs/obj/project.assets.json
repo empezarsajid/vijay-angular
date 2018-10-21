@@ -4916,6 +4916,16 @@
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
+      },
+      "Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repository.dll": {}
+        }
       }
     }
   },
@@ -12977,6 +12987,11 @@
         "windowsazure.storage.8.1.4.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
+    },
+    "Repository/1.0.0": {
+      "type": "project",
+      "path": "Repositories/Repository.csproj",
+      "msbuildProject": "Repositories/Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -12985,7 +13000,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 2.1.0-preview2-final",
       "Microsoft.NETCore.App >= 2.0.0",
       "Pomelo.EntityFrameworkCore.MySql >= 2.1.0-rc",
-      "Pomelo.EntityFrameworkCore.MySql.Design >= 1.1.2"
+      "Pomelo.EntityFrameworkCore.MySql.Design >= 1.1.2",
+      "Repository >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -13017,7 +13033,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\ESLabs\\vijay-angular\\AngularJs\\Repositories\\Repository.csproj": {
+              "projectPath": "E:\\ESLabs\\vijay-angular\\AngularJs\\Repositories\\Repository.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
