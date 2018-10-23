@@ -28,7 +28,7 @@ namespace AngularJs.Controllers
         private readonly IUserInRoleRepository _userInRoleRepository;
         private readonly vijayContext _context;
         private readonly AppSettings _appSettings;
-
+        private Encryption _encryption;
         public UsersController(IUserRepository userRepository, IUserInRoleRepository userInRoleRepository,
          vijayContext context, IOptions<AppSettings> appSettings)
         {
@@ -36,6 +36,7 @@ namespace AngularJs.Controllers
             _userInRoleRepository = userInRoleRepository;
             _context = context;
             _appSettings = appSettings.Value;
+            _encryption = new Encryption();
         }
 
         [HttpGet]
@@ -72,6 +73,8 @@ namespace AngularJs.Controllers
             user.CreatedDate = DateTime.Now;
             user.IsDeleted = false;
             user.IsApproved = false;
+            // Encrypt the Password before saving it to the db
+            user.Password = _encryption.Encrypt(_appSettings.EncryptionKey, user.Password);
             user = _userRepository.Add(user);
             // Add the user role to UserInRole table.
             _userInRoleRepository.Add(new UserInRole { UserId = user.Id, RoleId = userRole });
@@ -92,22 +95,35 @@ namespace AngularJs.Controllers
         [Route("UserLogin")]
         public UsersDTO UserLogin([FromBody]Users userModel)
         {
+            // Encrypt the Password before matching it with the database.
+            userModel.Password = _encryption.Encrypt(_appSettings.EncryptionKey, userModel.Password);
+
             var userLoginModel = (
                 from user in _context.Users
                 join role in _context.UserInRole
                 on user.Id equals role.UserId
                 where user.UserName == userModel.UserName && user.Password == userModel.Password
-                && user.IsApproved == true && user.IsDeleted == false
+                && user.IsDeleted == false
                 select new
                 {
                     Name = user.Name,
                     Id = user.Id,
-                    RoleId = role.RoleId
+                    RoleId = role.RoleId,
+                    IsApproved = user.IsApproved
                 }).FirstOrDefault();
 
             if (userLoginModel != null)
-            {
-
+            { 
+                /// If user is not yet approved , return the model without token
+                if (userLoginModel.IsApproved != true)
+                {
+                    return new UsersDTO
+                    {
+                        Name = userLoginModel.Name,
+                        Id = userLoginModel.Id,
+                        Token = ""
+                    };
+                }
                 // authentication successful so generate jwt token
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -141,7 +157,7 @@ namespace AngularJs.Controllers
         [Route("UpdateUser")]
         public Users UpdateUser([FromBody]Users user)
         {
-            var entity = _userRepository.Find(user.Id);
+            var entity = _userRepository.Find(m => m.Id == user.Id);
             if (entity != null)
             {
                 entity.ModifiedDate = DateTime.Now;

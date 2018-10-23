@@ -60,9 +60,9 @@ namespace AngularJs.Repository.GenericRepository
             return _dbset.Count(match) > 0;
         }
 
-        public virtual T Find(int id)
+        public virtual T Find(Expression<Func<T, bool>> match)
         {
-            return _dbset.Find(id);
+            return _dbset.Where(match).FirstOrDefault();
         }
 
         public virtual IEnumerable<T> GetList(Expression<Func<T, bool>> match)

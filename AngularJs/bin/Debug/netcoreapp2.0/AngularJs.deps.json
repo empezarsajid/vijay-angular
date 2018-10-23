@@ -29,11 +29,15 @@
           "Microsoft.NETCore.App": "2.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0-rc1-final",
           "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.2",
+<<<<<<< HEAD
           "Serilog": "2.7.1",
           "Serilog.Exceptions": "4.1.0",
           "Serilog.Settings.Configuration": "3.0.1",
           "Serilog.Sinks.File": "4.0.0",
           "Serilog.Sinks.GoogleCloudLogging": "1.5.0"
+=======
+          "Repository": "1.0.0"
+>>>>>>> 05b4632b61d045ae6a70c7196a585dbe5ccb4e4a
         },
         "runtime": {
           "AngularJs.dll": {}
@@ -4244,6 +4248,14 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "Repository/1.0.0": {
+        "runtime": {
+          "Repository.dll": {}
+        },
+        "compile": {
+          "Repository.dll": {}
+        }
+      },
       "Microsoft.NETCore.App/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.DotNetHostPolicy": "2.0.0",
@@ -6637,6 +6649,11 @@
       "sha512": "sha512-W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
+    },
+    "Repository/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.NETCore.App/2.0.0": {
       "type": "package",
