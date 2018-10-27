@@ -4,15 +4,28 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from '../registration/registration.component';
 import { LoginComponent } from '../login/login.component';
 import { HomeComponent } from '../home/home.component';
-import { DashboardComponent } from '../home/dashboard/dashboard.component';
+import { AdminHomeComponent } from '../admin/admin-home/admin-home.component';
+import { UserManagementComponent } from '../admin/user-management/user-management.component';
+import { DashboardComponent } from '../admin/dashboard/dashboard.component';
 import { SharedModule } from '../shared-module/shared.module';
 import { RouteGuard } from '../guards/routeguard.guard';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'dashboard', component: DashboardComponent,canActivate: [RouteGuard]  },
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [RouteGuard], 
+    data: {
+      expectedRole: '1'
+    },
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: AdminHomeComponent },
+      { path: 'manageusers', component: UserManagementComponent },
+    ]
+  },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];
@@ -21,13 +34,15 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    //AdminLayoutModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [
     RouterModule,
-    SharedModule
+    SharedModule,
+    //AdminLayoutModule
   ],
-  declarations: [RegistrationComponent, LoginComponent, HomeComponent]
+  declarations: [RegistrationComponent, LoginComponent, HomeComponent, DashboardComponent]
 })
 
 export class AppRouterModule { }

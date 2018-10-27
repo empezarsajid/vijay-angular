@@ -10,15 +10,26 @@ import { UserService } from './services/user.service';
 import { JwtInterceptor } from './helpers/jwtInterceptor';
 import { ErrorInterceptor} from './helpers/errorInterceptor';
 
+
+import { CfsComponent } from './admin/cfs/cfs.component';
+import { EcyComponent } from './admin/ecy/ecy.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    CfsComponent,
+    EcyComponent,
+    UserManagementComponent,
+    AdminHomeComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRouterModule,
+    
     HttpClientModule,
   ],
   providers: [HttpService,UserService,
