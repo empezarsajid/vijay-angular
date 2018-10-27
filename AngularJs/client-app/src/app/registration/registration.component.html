@@ -1,61 +1,64 @@
 <head>
   <style>
-     ::ng-deep .mat-form-field-wrapper {
+    ::ng-deep .mat-form-field-wrapper {
       width: 400px !important;
     }
   </style>
 </head>
-<h2>Register</h2>
-<div [hidden]="!success" class="alert alert-success">
-    <strong>Success!</strong> Successfully registered with the system.
+<div class="wrapper">
+  <div class="main-panel">
+    <h2>Register</h2>
+    <div [hidden]="!success" class="alert alert-success">
+      <strong>Success!</strong> Successfully registered with the system.
+    </div>
+    <div [hidden]="!error" class="alert alert-danger">
+      <strong>Error!</strong> Username or email already exists.
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="example-form">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" name="name" formControlName="name">
+          <mat-error *ngIf="submitted && f.name.errors && f.name.errors.required">First name is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="User Name" name="userName" formControlName="userName">
+          <mat-error *ngIf="submitted && f.userName.errors && f.userName.errors.required">Username is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput type="password" placeholder="Password" name="password" formControlName="password">
+          <mat-error *ngIf="submitted && f.password.errors && f.password.errors.required">Password is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput type="password" placeholder="Confirm Password" name="confirmPassword" formControlName="confirmPassword">
+          <span class="" *ngIf="submitted && confirmPasswordError">Password mismatch</span>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Phone" name="phone" formControlName="phone">
+          <mat-error *ngIf="submitted && f.phone.errors && f.phone.errors.required">Phone is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput type="email" placeholder="Email" name="email" formControlName="email">
+          <mat-error *ngIf="submitted && f.email.errors && f.email.errors.required">Email is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" mat-raised-button [disabled]="loading" name="submit" class="btn btn-primary" color="primary">Register</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <a [routerLink]="['/login']" class="btn btn-link">Login</a>
+      </div>
+    </form>
+  </div>
 </div>
-<div [hidden]="!error" class="alert alert-danger">
-    <strong>Error!</strong> Username or email already exists.
-</div>
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="example-form">
-  <div class="form-group">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Name" name="name" formControlName="name">
-      <mat-error *ngIf="submitted && f.name.errors && f.name.errors.required">First name is required</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="form-group">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="User Name" name="userName" formControlName="userName">
-      <mat-error *ngIf="submitted && f.userName.errors && f.userName.errors.required">Username is required</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="form-group">
-    <mat-form-field class="example-full-width">
-      <input matInput type="password" placeholder="Password" name="password" formControlName="password">
-      <mat-error *ngIf="submitted && f.password.errors && f.password.errors.required">Password is required</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="form-group">
-    <mat-form-field class="example-full-width">
-      <input matInput type="password" placeholder="Confirm Password" name="confirmPassword" formControlName="confirmPassword">
-      <span class="" *ngIf="submitted && confirmPasswordError">Password mismatch</span>
-    </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Phone" name="phone" formControlName="phone">
-      <mat-error *ngIf="submitted && f.phone.errors && f.phone.errors.required">Phone is required</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <mat-form-field class="example-full-width">
-      <input matInput type="email" placeholder="Email" name="email" formControlName="email">
-      <mat-error *ngIf="submitted && f.email.errors && f.email.errors.required">Email is required</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div class="form-group">
-    <button type="submit" mat-raised-button [disabled]="loading" name="submit" class="btn btn-primary" color="primary">Register</button>
-    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-    />
-    <a [routerLink]="['/login']" class="btn btn-link">Login</a>
-  </div>
-</form>

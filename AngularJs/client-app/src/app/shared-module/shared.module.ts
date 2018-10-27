@@ -6,11 +6,18 @@ import {
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from '../helpers/jwtInterceptor';
-
+//import { AdminLayoutModule } from '../layouts/admin-layout/admin-layout.module';
+import { NavbarModule } from '../shared/navbar/navbar.module';
+import { FooterModule } from '../shared/footer/footer.module';
+import { SidebarModule } from '../sidebar/sidebar.module';
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    //AdminLayoutModule,
+    NavbarModule,
+    FooterModule,
+    SidebarModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -19,8 +26,8 @@ import { JwtInterceptor } from '../helpers/jwtInterceptor';
     MatSortModule
   ],
   exports: [
-    ReactiveFormsModule, MatFormFieldModule, MatInputModule,
-    MatButtonModule, MatPaginatorModule, MatTableModule, MatSortModule
+    ReactiveFormsModule, NavbarModule, FooterModule, SidebarModule,
+    MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatSortModule
   ],
   declarations: []
 })

@@ -10,9 +10,15 @@ export class RouteGuard implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    // Get expected role from route configuration
+    const expectedRole = route.data.expectedRole;
     if (localStorage.getItem('currentUser') != 'null') {
-      // logged in so return true
-      return true;
+      // User is logged in, check the user role now
+      var user = JSON.parse(localStorage.getItem('currentUser'));
+      if (user.roleId == expectedRole) {
+        return true;
+      }
+      return false;
     }
 
     // not logged in so redirect to login page with the return url
