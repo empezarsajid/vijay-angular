@@ -18,6 +18,9 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using AngularJs.Helpers;
+using Serilog;
+using Serilog.Sinks.GoogleCloudLogging;
+using Serilog.Exceptions;
 
 namespace AngularJs
 {
@@ -26,6 +29,9 @@ namespace AngularJs
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+
+
         }
 
         public IConfiguration Configuration { get; }
@@ -67,6 +73,14 @@ namespace AngularJs
                 };
             });
 
+
+            Log.Logger = new LoggerConfiguration()
+            .Enrich.WithExceptionDetails()
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger();
+
+
+
             // Add DI for db context and repositories
             services.AddDbContext<vijayContext>(options =>
               options.UseMySql(connectionString.ConnectionString));
@@ -82,6 +96,8 @@ namespace AngularJs
                 app.UseDeveloperExceptionPage();
             }
 
+
+
             // app.UseCors(
             //     options=> options.WithOrigins("*").AllowAnyMethod()
             // );
@@ -92,7 +108,7 @@ namespace AngularJs
             .AllowAnyHeader()
             .AllowCredentials()
             );
-            
+
             app.UseAuthentication();
 
             app.UseMvc();
