@@ -1,9 +1,3 @@
-<div [hidden]="!success.isSuccess" class="alert alert-success">
-  <strong>Success!</strong> {{success.message}}
-</div>
-<div [hidden]="!error.isError" class="alert alert-danger">
-  <strong>Error!</strong> {{error.message}}
-</div>
 <table mat-table [dataSource]="dataSource" class="table table striped">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>

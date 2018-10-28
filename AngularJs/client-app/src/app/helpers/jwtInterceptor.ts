@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+declare var $: any;
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -9,12 +9,41 @@ export class JwtInterceptor implements HttpInterceptor {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
             request = request.clone({
-                setHeaders: { 
+                setHeaders: {
                     Authorization: `Bearer ${currentUser.token}`
                 }
             });
         }
 
-        return next.handle(request);
+        return next.handle(request).map(event => {
+            // Intercept the response and show the notification accordingly.
+            if (event instanceof HttpResponse) {
+                if (event.body.Message != '') {
+                    if (event.body.Success == true) {
+                        this.showNotification("top", "center", "success", event.body.Message);
+                    }
+                    else {
+                        this.showNotification("bottom", "center", "danger", event.body.Message);
+                    }
+                }
+            }
+            return event;
+        });
     }
+
+    showNotification(from, align, type, message) {
+
+        $.notify({
+            icon: "pe-7s-gift",
+            message: message
+        }, {
+                type: type,
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+    }
+
 }

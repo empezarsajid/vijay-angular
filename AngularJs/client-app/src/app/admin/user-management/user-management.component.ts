@@ -54,7 +54,7 @@ export class UserDataSource extends DataSource<any> {
     super();
   }
   connect(): Observable<UserModel[]> {
-    return this.userService.getUser();
+    return this.userService.getUser("http://localhost:5000/api/users/getall");
   }
   disconnect() { }
 }

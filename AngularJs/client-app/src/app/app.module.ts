@@ -23,7 +23,7 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     CfsComponent,
     EcyComponent,
     UserManagementComponent,
-    AdminHomeComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,

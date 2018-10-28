@@ -74,10 +74,10 @@ namespace AngularJs
             });
 
 
-            Log.Logger = new LoggerConfiguration()
-            .Enrich.WithExceptionDetails()
-                .ReadFrom.Configuration(Configuration)
-                .CreateLogger();
+            // Log.Logger = new LoggerConfiguration()
+            // .Enrich.WithExceptionDetails()
+            //     .ReadFrom.Configuration(Configuration)
+            //     .CreateLogger();
 
 
 
@@ -111,7 +111,14 @@ namespace AngularJs
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseMvc(
+                        routes =>
+                        {
+                            routes.MapRoute(
+                                name: "default",
+                                template: "{controller=Home}/{action=Index}/{id?}");
+                        }
+                    );
         }
     }
 }

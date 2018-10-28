@@ -5,12 +5,12 @@ import { Observable }   from 'rxjs';
 import { UserModel } from '../models/UserModel';
 @Injectable()
 export class UserService {
-  private serviceUrl = 'http://localhost:5000/api/users/getall';
+  //private serviceUrl = 'http://localhost:5000/api/users/getall';
   
   constructor(private http: HttpClient) { }
   
-  getUser(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(this.serviceUrl);
+  getUser(url: string): Observable<any> {
+    return this.http.get<any>(url);
   }
   
 }

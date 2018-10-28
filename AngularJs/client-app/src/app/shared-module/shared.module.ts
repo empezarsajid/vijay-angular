@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatFormFieldModule, MatInputModule, MatButtonModule,
-  MatPaginatorModule, MatTableModule, MatSortModule
+  MatPaginatorModule, MatTableModule, MatSortModule, MatTabsModule,
+  MatDividerModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from '../helpers/jwtInterceptor';
@@ -23,11 +24,14 @@ import { SidebarModule } from '../sidebar/sidebar.module';
     MatButtonModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatTabsModule,
+    MatDividerModule
   ],
   exports: [
     ReactiveFormsModule, NavbarModule, FooterModule, SidebarModule,
-    MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatSortModule
+    MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginatorModule, MatTableModule, MatSortModule,
+    MatTabsModule, MatDividerModule
   ],
   declarations: []
 })

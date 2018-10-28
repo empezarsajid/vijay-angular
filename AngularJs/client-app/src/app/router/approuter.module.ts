@@ -7,6 +7,8 @@ import { HomeComponent } from '../home/home.component';
 import { AdminHomeComponent } from '../admin/admin-home/admin-home.component';
 import { UserManagementComponent } from '../admin/user-management/user-management.component';
 import { DashboardComponent } from '../admin/dashboard/dashboard.component';
+import { EcyComponent } from '../admin/ecy/ecy.component';
+import { CfsComponent } from '../admin/cfs/cfs.component';
 import { SharedModule } from '../shared-module/shared.module';
 import { RouteGuard } from '../guards/routeguard.guard';
 
@@ -16,7 +18,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
   {
-    path: 'dashboard', component: DashboardComponent, canActivate: [RouteGuard], 
+    path: 'admin', component: DashboardComponent, canActivate: [RouteGuard],
     data: {
       expectedRole: '1'
     },
@@ -24,6 +26,8 @@ const appRoutes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AdminHomeComponent },
       { path: 'manageusers', component: UserManagementComponent },
+      { path: 'ecy', component: EcyComponent },
+      { path: 'cfs', component: CfsComponent },
     ]
   },
   // otherwise redirect to home

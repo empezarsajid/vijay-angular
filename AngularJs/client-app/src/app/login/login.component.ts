@@ -35,6 +35,9 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin(): void {
+
+    this.router.navigate(['admin']);
+    
     this.loading = true;
     var data = {
       "UserName": this.f.userName.value,

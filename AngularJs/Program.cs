@@ -13,9 +13,9 @@ namespace AngularJs
     {
         public static void Main(string[] args)
         {
-            var gcpCredentaialPath = "client_secret.json";
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", gcpCredentaialPath);
-            BuildWebHost(args).Run();
+            // var gcpCredentaialPath = "client_secret.json";
+            // System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", gcpCredentaialPath);
+             BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
