@@ -11,6 +11,8 @@ import { EcyComponent } from '../admin/ecy/ecy.component';
 import { CfsComponent } from '../admin/cfs/cfs.component';
 import { SharedModule } from '../shared-module/shared.module';
 import { RouteGuard } from '../guards/routeguard.guard';
+import { EcyDetailComponent } from '../admin/ecy/ecy-detail/ecy-detail.component';
+import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 
 
 const appRoutes: Routes = [
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
       { path: 'home', component: AdminHomeComponent },
       { path: 'manageusers', component: UserManagementComponent },
       { path: 'ecy', component: EcyComponent },
-      { path: 'cfs', component: CfsComponent },
+      { path: 'ecy/:id', component: EcyDetailComponent, pathMatch: 'full' },
+      { path: 'cfs', component: CfsComponent }
     ]
   },
   // otherwise redirect to home

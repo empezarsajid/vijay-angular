@@ -15,6 +15,8 @@ import { CfsComponent } from './admin/cfs/cfs.component';
 import { EcyComponent } from './admin/ecy/ecy.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { EcyDetailComponent } from './admin/ecy/ecy-detail/ecy-detail.component';
+//import { LoginNavbarComponent } from './shared/login-navbar/login-navbar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     CfsComponent,
     EcyComponent,
     UserManagementComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    EcyDetailComponent,
+    //LoginNavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { UserService } from '../../services/user.service';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import 'rxjs/Rx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'eslab-ecy',
@@ -12,7 +13,7 @@ import 'rxjs/Rx';
 })
 export class EcyComponent implements OnInit {
 
-  constructor(private httpService: HttpService, private userService: UserService) { }
+  constructor(private httpService: HttpService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,7 +23,7 @@ export class EcyComponent implements OnInit {
   dataSource = new EcyDataSource(this.userService);
 
   showData(row): void {
-    console.log(row);
+    this.router.navigate(['admin/ecy', row.Vessel]);
   }
 }
 
