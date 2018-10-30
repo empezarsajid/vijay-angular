@@ -1,3 +1,10 @@
+<head>
+    <style>
+      .example-full-width {
+        width:100%;
+      }
+    </style>
+  </head>
 <div class="content">
   <div class="container-fluid">
     <div class="row">
@@ -76,7 +83,7 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showData(row)"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showData(row)" style="cursor:pointer"></tr>
                   </table>
                 </div>
               </div>
@@ -87,24 +94,36 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title ">Form</h4>
-                <p class="card-category"> Form to save data</p>
+                <h4 class="card-title " style="text-align: center;">Form</h4>
+                <p class="card-category" style="text-align: center;"> Form to save data</p>
               </div>
               <div class="card-body">
-                <mat-form-field>
-                  <mat-select placeholder="Select">
-                    <mat-option value="option">Option</mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <!-- <mat-form-field>
-                          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field> -->
-
-                <button mat-raised-button color="primary" style="width: 200px;">Submit</button>
-
+                <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <mat-form-field class="example-full-width">
+                        <mat-select placeholder="Select" >
+                          <mat-option value="option1">Option 1</mat-option>
+                          <mat-option value="option2">Option 2</mat-option>
+                          <mat-option value="option3">Option 3</mat-option>
+                          <mat-option value="option4">Option 4</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                      <mat-form-field class="example-full-width">
+                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker disabled="false"></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <button mat-raised-button color="primary" style="width: 200px;">Submit</button>
+                      </div>
+                  </div>
+                  <div class="col-md-4"></div>
+                </div>
               </div>
             </div>
           </div>
