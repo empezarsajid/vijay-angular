@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 
@@ -15,6 +15,8 @@ export class RegistrationComponent implements OnInit {
   success = false;
   error = false;
 
+  @Input() source: string;
+  
   constructor(private formBuilder: FormBuilder, private httpService: HttpService) { }
 
   ngOnInit() {
@@ -72,7 +74,7 @@ export class RegistrationComponent implements OnInit {
       "Email": data.Email
     };
 
-    this.httpService.httpPostPromise('api/users/CheckIfExists', data).then(res=> {
+    this.httpService.httpPostPromise('api/users/CheckIfExists', data).then(res => {
       if (res != null && res != true) {
         this.addUser(data);
       }

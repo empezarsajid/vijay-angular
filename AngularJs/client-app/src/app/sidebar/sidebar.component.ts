@@ -6,19 +6,19 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  parent: string;
+  hasChild: boolean;
 }
 export const ROUTES: RouteInfo[] = [
-  // { path: '/dashboard', title: 'Dashboard', icon: 'pe-7s-graph', class: '' },
-  { path: './home', title: 'Dashboard', icon: 'pe-7s-graph', class: '', },
-  { path: './ecy', title: 'ECY', icon: 'pe-7s-news-paper', class: '' },
-  { path: './cfs', title: 'CFS', icon: 'pe-7s-science', class: '' },
-  { path: './manageusers', title: 'Manage User', icon: 'pe-7s-user', class: '' },
-  //{ path: '/table', title: 'Table List', icon: 'pe-7s-note2', class: '' },
-  //{ path: '/typography', title: 'Typography',  icon:'pe-7s-news-paper', class: '' },
-  //{ path: '/icons', title: 'Icons',  icon:'pe-7s-science', class: '' },
-  // { path: '/maps', title: 'Maps', icon: 'pe-7s-map-marker', class: '' },
-  // { path: '/notifications', title: 'Notifications', icon: 'pe-7s-bell', class: '' },
-  //{ path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
+  { path: './home', title: 'Dashboard', icon: 'pe-7s-graph', class: '', parent: '', hasChild: false },
+  { path: './ecy', title: 'ECY', icon: 'pe-7s-news-paper', class: '', parent: '', hasChild: true },
+  { path: './cfs', title: 'CFS', icon: 'pe-7s-science', class: '', parent: '', hasChild: false },
+  { path: './manageusers', title: 'Manage User', icon: 'pe-7s-user', class: '', parent: '', hasChild: false },
+];
+
+export const childRoutes: RouteInfo[] = [
+  { path: './home', title: 'Dashboard', icon: 'pe-7s-graph', class: '', parent: 'ECY', hasChild: false },
+  { path: './ecy', title: 'ECY', icon: 'pe-7s-news-paper', class: '', parent: 'ECY', hasChild: false }
 ];
 
 @Component({
@@ -39,4 +39,9 @@ export class SidebarComponent implements OnInit {
     //   }
     return true;
   };
+
+  getChildRoutes(parent: string): RouteInfo[] {
+    return childRoutes.filter(menuItem => menuItem.parent == parent);
+  }
+
 }

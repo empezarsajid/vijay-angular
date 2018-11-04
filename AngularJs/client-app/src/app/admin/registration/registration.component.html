@@ -1,0 +1,111 @@
+<head>
+  <style>
+    .example-full-width {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="container-fluid">
+    <form [formGroup]="registerEnblockForm" (ngSubmit)="onSubmit()" class="example-form">
+      <mat-card style="margin-top:20px;">
+        <mat-card-title>Registration</mat-card-title>
+        <mat-card-subtitle>Registration for enblock users</mat-card-subtitle>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="User Email" name="userEmail" formControlName="userEmail"
+                    [matAutocomplete]="usersMail">
+                  <mat-autocomplete #usersMail="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option}}</mat-option>
+                  </mat-autocomplete>
+                  <mat-error *ngIf="submitted && f.userEmail.errors && f.userEmail.errors.required">User email is
+                    required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Client" name="client" formControlName="client">
+                  <mat-error *ngIf="submitted && f.client.errors && f.client.errors.required">Client is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-select placeholder="Group" name="group" formControlName="group">
+                      <mat-option *ngFor="let group of groups" [value]="group">
+                        {{group}}
+                      </mat-option>
+                    </mat-select>
+                  <mat-error *ngIf="submitted && f.client.errors && f.client.errors.required">Client is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Day Limit" name="limit" formControlName="limit">
+                  <mat-error *ngIf="submitted && f.client.errors && f.client.errors.required">Client is required</mat-error>
+                </mat-form-field>
+              </div>
+
+              <mat-divider></mat-divider>
+              <div class="col-md-6">
+                <h4>Empty</h4>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Limit" name="emptyLimit" formControlName="emptyLimit">
+                    <mat-error *ngIf="submitted && f.userEmail.errors && f.userEmail.errors.required">User email is
+                      required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Hold" name="emptyHold" formControlName="emptyHold">
+                    <mat-error *ngIf="submitted && f.client.errors && f.client.errors.required">Client is required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Approved" name="emptyApproved" formControlName="emptyApproved">
+                    <mat-error *ngIf="submitted && f.client.errors && f.client.errors.required">Client is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-6" style="border-left: 1px solid gray">
+                <h4>Loaded</h4>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Limit" name="loadedLimit" formControlName="loadedLimit">
+                    <mat-error *ngIf="submitted && f.userEmail.errors && f.userEmail.errors.required">User email is
+                      required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Hold" name="loadedHold" formControlName="loadedHold">
+                    <mat-error *ngIf="submitted && f.client.errors && f.client.errors.required">Client is required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Approved" name="loadedApproved" formControlName="loadedApproved">
+                    <mat-error *ngIf="submitted && f.client.errors && f.client.errors.required">Client is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="form-group" style="text-align: center;">
+                <button type="submit" mat-raised-button [disabled]="loading" name="submit" style="width: 200px;" color="primary">Register</button>
+              </div>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+
+  </div>
+</div>

@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import {
   MatFormFieldModule, MatInputModule, MatButtonModule,
   MatPaginatorModule, MatTableModule, MatSortModule, MatTabsModule,
-  MatDividerModule, MatSelectModule, MatDatepickerModule,MatNativeDateModule
+  MatDividerModule, MatSelectModule, MatDatepickerModule,MatNativeDateModule,
+  MatCardModule,MatAutocompleteModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarModule } from '../shared/navbar/navbar.module';
@@ -26,13 +27,16 @@ import { SidebarModule } from '../sidebar/sidebar.module';
     MatDividerModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule,
+    MatAutocompleteModule
   ],
   exports: [
     ReactiveFormsModule, NavbarModule, FooterModule, SidebarModule,
     MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginatorModule,
     MatTableModule, MatSortModule, MatTabsModule, MatDividerModule,
-    MatSelectModule, MatDatepickerModule,MatNativeDateModule
+    MatSelectModule, MatDatepickerModule,MatNativeDateModule,MatCardModule,
+    MatAutocompleteModule
   ],
   declarations: []
 })

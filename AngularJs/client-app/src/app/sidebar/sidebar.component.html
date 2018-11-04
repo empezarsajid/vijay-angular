@@ -1,15 +1,14 @@
-
 <div class="sidebar-wrapper">
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
+        <a [routerLink]="['./home']" class="simple-text">
             <div class="logo-img">
-                <img src="/assets/img/angular2-logo-white.png"/>
+                <img src="/assets/img/angular2-logo-white.png" />
             </div>
-            Creative Tim
+            ES-Labs
         </a>
     </div>
     <ul class="nav responsive-nav">
-         <!--<li *ngIf="isMobileMenu()">
+        <!--<li *ngIf="isMobileMenu()">
             <a class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-dashboard"></i>
 				<p class="hidden-lg hidden-md">Dashboard</p>
@@ -68,11 +67,108 @@
             </a>
         </li>
         <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li> -->
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
-            <a  [routerLink]="[menuItem.path]">
+        <!-- <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">
                 <i class="{{menuItem.icon}}"></i>
                 <p>{{menuItem.title}}</p>
             </a>
+        </li> -->
+
+        <li routerLinkActive="active">
+            <a [routerLink]="['./home']">
+                <i class="pe-7s-graph"></i>
+                <p>Dashboard</p>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">
+                <i class="pe-7s-news-paper"></i>
+                <p>Enblock</p>
+            </a>
+            <ul style="margin-left :10px;margin-top: 2px;" class="nav collapse" id="submenu1" role="menu"
+                aria-labelledby="btn-1">
+                <li>
+                    <a id="btn-submenu1" data-toggle="collapse" data-target="#childmenu1">
+                        <i class="pe-7s-graph1"></i>
+                        <p>ECY</p>
+                    </a>
+                    <ul style="margin-left :10px;margin-top: 2px;" class="nav collapse" id="childmenu1" role="menu"
+                        aria-labelledby="btn-submenu1">
+                        <li routerLinkActive="active">
+                            <a [routerLink]="['./ecy/dashboard']">
+                                <i class="pe-7s-graph2"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="['./ecy/start']">
+                                <i class="pe-7s-play"></i>
+                                <p>Start</p>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="['./ecy/troubleshoot']">
+                                <i class="pe-7s-note2"></i>
+                                <p>Troubleshoot</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a id="btn-submenu2" data-toggle="collapse" data-target="#childmenu2">
+                        <i class="pe-7s-helm"></i>
+                        <p>CFS</p>
+                    </a>
+                    <ul style="margin-left :10px;margin-top: 2px;" class="nav collapse" id="childmenu2" role="menu"
+                        aria-labelledby="btn-submenu2">
+                        <li routerLinkActive="active">
+                            <a [routerLink]="['./cfs/dashboard']">
+                                <i class="pe-7s-graph3"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="['./cfs/start']">
+                                <i class="pe-7s-play"></i>
+                                <p>Start</p>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="['./cfs/troubleshoot']">
+                                <i class="pe-7s-note2"></i>
+                                <p>Troubleshoot</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['./registration']">
+                        <i class="pe-7s-user"></i>
+                        <p>Registration</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li routerLinkActive="active">
+            <a id="btn-2" data-toggle="collapse" data-target="#submenu3" aria-expanded="false">
+                <i class="pe-7s-id"></i>
+                <p>Administration</p>
+            </a>
+            <ul style="margin-left :10px;margin-top: 2px;" class="nav collapse" id="submenu3" role="menu"
+                aria-labelledby="btn-2">
+                <li routerLinkActive="active">
+                    <a [routerLink]="['./adduser']">
+                        <i class="pe-7s-add-user"></i>
+                        <p>Add Users</p>
+                    </a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['./manageusers']">
+                        <i class="pe-7s-users"></i>
+                        <p>Manager Users</p>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </div>

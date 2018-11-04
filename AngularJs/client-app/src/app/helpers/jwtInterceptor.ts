@@ -33,8 +33,9 @@ export class JwtInterceptor implements HttpInterceptor {
 
     showNotification(from, align, type, message) {
 
+        //color = 'primary';
         $.notify({
-            icon: "pe-7s-gift",
+            icon: "pe-7s-bell",
             message: message
         }, {
                 type: type,
