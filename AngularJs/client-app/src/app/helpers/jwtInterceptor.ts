@@ -18,7 +18,9 @@ export class JwtInterceptor implements HttpInterceptor {
         return next.handle(request).map(event => {
             // Intercept the response and show the notification accordingly.
             if (event instanceof HttpResponse) {
-                if (event.body.Message != '') {
+                // Check body.Message with undefined to verify the property
+                // exists in returned response.
+                if (event.body.Message != undefined && event.body.Message != '') {
                     if (event.body.Success == true) {
                         this.showNotification("top", "center", "success", event.body.Message);
                     }

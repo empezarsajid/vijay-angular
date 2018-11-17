@@ -86,6 +86,8 @@ namespace AngularJs
               options.UseMySql(connectionString.ConnectionString));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserInRoleRepository, UserInRoleRepository>();
+            services.AddScoped<IEnblockUsersRepository, EnblockUsersRepository>();
+            services.AddScoped<IEmailRangeGroupRepository, EmailRangeGroupRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

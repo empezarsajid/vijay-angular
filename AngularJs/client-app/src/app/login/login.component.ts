@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   userLogin(): void {
 
-    this.router.navigate(['admin']);
+    //this.router.navigate(['admin']);
     
     this.loading = true;
     var data = {
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         }
         else {
           localStorage.setItem('currentUser', JSON.stringify(data));
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['admin']);
         }
       }
       else {

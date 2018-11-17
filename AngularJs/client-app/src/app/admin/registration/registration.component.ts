@@ -8,6 +8,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
 export class EnblockRegistrationComponent implements OnInit {
   registerEnblockForm: FormGroup;
   submitted = false;
